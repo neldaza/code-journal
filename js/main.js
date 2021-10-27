@@ -15,14 +15,13 @@ function srcUpdate(event) {
 
 $photoUrl.addEventListener('input', srcUpdate);
 
-var submissionDataModel = [];
-
 function submitFunction(event) {
   event.preventDefault();
   var photoTitleValue = $form.elements.photoTitle.value;
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;
   var submissionObject = { photoTitleValue, photoUrlValue, commentsValue };
+  // eslint-disable-next-line no-undef
   submissionDataModel.push(submissionObject);
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
@@ -30,10 +29,3 @@ function submitFunction(event) {
 }
 
 $entryForm.addEventListener('submit', submitFunction);
-
-function beforeUnload(event) {
-  var submissionDataModelJSON = JSON.stringify(submissionDataModel);
-  localStorage.setItem('javascript-local-storage', submissionDataModelJSON);
-}
-
-window.addEventListener('beforeunload', beforeUnload);
