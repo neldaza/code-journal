@@ -40,3 +40,13 @@ body {
   position: relative;
   top: 0.75rem;
 }
+
+.header {
+  background-color: #562a81;
+  width: 100%;
+  color: white;
+}
+
+.header-h2 {
+  font-weight: lighter;
+}
