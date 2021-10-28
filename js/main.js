@@ -16,7 +16,6 @@ function submitFunction(event) {
   event.preventDefault();
   data.entryId = data.nextEntryId - 1;
   data.nextEntryId++;
-
   var photoTitleValue = $form.elements.photoTitle.value;
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;
