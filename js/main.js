@@ -17,6 +17,8 @@ $photoUrl.addEventListener('input', srcUpdate);
 
 function submitFunction(event) {
   event.preventDefault();
+  var entryID = data.nextEntryId - 1;
+  data.nextEntryId++;
   var photoTitleValue = $form.elements.photoTitle.value;
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;

@@ -9,7 +9,7 @@ var data = {
 
 var previousSubmissionDataModel = localStorage.getItem('javascript-local-storage');
 if (previousSubmissionDataModel !== null) {
-  data.entries = JSON.parse(previousSubmissionDataModel);
+  data = (JSON.parse(previousSubmissionDataModel));
 }
 
 function beforeUnload(event) {
