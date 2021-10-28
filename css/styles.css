@@ -50,3 +50,38 @@ body {
 .header-h2 {
   font-weight: lighter;
 }
+
+.list-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: unset;
+  margin-block-start: unset;
+  margin-block-end: unset;
+}
+
+.list-p {
+  line-height: 2rem;
+}
+
+.header-category {
+  font-size: 14pt;
+  margin-left: 1rem;
+}
+
+.entries-and-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-button {
+  background-color: #562a81;
+  border-radius: 5px;
+  border-color: transparent;
+  color: #bac;
+  flex-basis: 8%;
+}
