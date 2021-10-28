@@ -76,12 +76,20 @@ ul {
 .entries-and-button {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .new-button {
   background-color: #562a81;
   border-radius: 5px;
   border-color: transparent;
-  color: #bac;
+  color: white;
   flex-basis: 8%;
+  height: 2rem;
+  font-size: 13pt;
+}
+
+.no-entries {
+  visibility: collapse;
+  justify-content: center;
 }
