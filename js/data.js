@@ -5,19 +5,19 @@ var data = {
   view: 'entry-form',
   entries: [],
   editing: null,
-  nextEntryId: 1,
-  entryId: 0
+  nextEntryId: 1
+
 };
 
 var previousDataJSON = localStorage.getItem('javascript.local.storage');
 
 if (previousDataJSON !== null) {
   var dataJSON = JSON.stringify(data);
-  dataJSON = JSON.parse(data.entries);
+  data = JSON.parse(previousDataJSON);
 }
 
 function beforeUnload(event) {
-  var dataEntriesJSON = JSON.stringify(data.entries);
+  var dataEntriesJSON = JSON.stringify(data);
   localStorage.setItem('javascript-local-storage', dataEntriesJSON);
 }
 

@@ -14,12 +14,13 @@ $photoUrl.addEventListener('input', srcUpdate);
 
 function submitFunction(event) {
   event.preventDefault();
-  data.entryId = data.nextEntryId - 1;
-  data.nextEntryId++;
+
   var photoTitleValue = $form.elements.photoTitle.value;
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;
   var submissionObject = { photoTitleValue, photoUrlValue, commentsValue };
+  submissionObject.entryId = data.nextEntryId;
+  data.nextEntryId++;
   data.entries.unshift(submissionObject);
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
