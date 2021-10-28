@@ -7,15 +7,14 @@ var data = {
   nextEntryId: 1
 };
 
-var submissionDataModel = [];
 var previousSubmissionDataModel = localStorage.getItem('javascript-local-storage');
 if (previousSubmissionDataModel !== null) {
-  submissionDataModel = JSON.parse(previousSubmissionDataModel);
+  data.entries = JSON.parse(previousSubmissionDataModel);
 }
 
 function beforeUnload(event) {
-  var submissionDataModelJSON = JSON.stringify(submissionDataModel);
-  localStorage.setItem('javascript-local-storage', submissionDataModelJSON);
+  var dataEntriesJSON = JSON.stringify(data.entries);
+  localStorage.setItem('javascript-local-storage', dataEntriesJSON);
 }
 
 window.addEventListener('beforeunload', beforeUnload);

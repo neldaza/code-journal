@@ -22,7 +22,7 @@ function submitFunction(event) {
   var photoUrlValue = $form.elements.photoUrl.value;
   var submissionObject = { photoTitleValue, photoUrlValue, commentsValue };
   // eslint-disable-next-line no-undef
-  submissionDataModel.push(submissionObject);
+  data.entries.unshift(submissionObject);
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
 
