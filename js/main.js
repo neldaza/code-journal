@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* global data */
 /* exported data */
 var $photoUrl = document.querySelector('.photo-url');
@@ -28,3 +29,27 @@ function submitFunction(event) {
 }
 
 $entryForm.addEventListener('submit', submitFunction);
+
+function entryDOMTree(entry) {
+  var li = document.createElement('li');
+  var divPictureColumnHalf = document.createElement('div');
+  var img = document.createElement('img');
+  var divDescriptionColumnHalf = document.createElement('div');
+  var h1 = document.createElement('h1');
+  var p = document.createElement('p');
+
+  li.setAttribute('class', 'row');
+  divPictureColumnHalf.setAttribute('class', 'column-half');
+  img.setAttribute('src', entry.photoUrlValue);
+  divDescriptionColumnHalf.setAttribute('class', 'column-half');
+
+  var entryTitle = document.createTextNode(entry.photoTitleValue);
+  var photoDescription = document.createTextNode(entry.commentsValue);
+  h1.appendChild(entryTitle);
+  p.appendChild(photoDescription);
+
+  li.append(divPictureColumnHalf, divDescriptionColumnHalf);
+  divPictureColumnHalf.append(img);
+  divDescriptionColumnHalf.append(h1, p);
+
+}
