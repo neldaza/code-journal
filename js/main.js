@@ -11,7 +11,7 @@ function srcUpdate(event) {
 
 }
 
-$photoUrl.addEventListener('input', srcUpdate);
+$img.addEventListener('input', srcUpdate);
 
 function submitFunction(event) {
   event.preventDefault();

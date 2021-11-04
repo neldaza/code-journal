@@ -71,6 +71,8 @@ ul {
 .header-category {
   font-size: 14pt;
   margin-left: 1rem;
+  color: white;
+  text-decoration: none;
 }
 
 .entries-and-button {
