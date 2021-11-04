@@ -53,3 +53,11 @@ function entryDOMTree(entry) {
   divDescriptionColumnHalf.append(h1, p);
 
 }
+
+function loadedDOM(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    window.append(entryDOMTree(data.entries[i]));
+  }
+}
+
+window.addEventListener('DOMContentLoaded', loadedDOM);
