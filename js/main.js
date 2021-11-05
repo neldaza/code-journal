@@ -2,16 +2,17 @@
 /* global data */
 /* exported data */
 var $photoUrl = document.querySelector('.photo-url');
-var $img = document.querySelector('img');
+var $formImg = document.querySelector('.placeholder-img');
 var $entryForm = document.querySelector('.entry-form');
 var $form = document.querySelector('form');
+var $ul = document.querySelector('ul');
+
+/// SUBMIT FORM ONLY ///
 
 function srcUpdate(event) {
-  $img.setAttribute('src', $photoUrl.value);
+  $formImg.setAttribute('src', $photoUrl.value);
 
 }
-
-$photoUrl.addEventListener('input', srcUpdate);
 
 function submitFunction(event) {
   event.preventDefault();
@@ -23,13 +24,11 @@ function submitFunction(event) {
   submissionObject.entryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(submissionObject);
-  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $formImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
 
 }
 
-$entryForm.addEventListener('submit', submitFunction);
-// th
 function entryDOMTree(entry) {
   var li = document.createElement('li');
   var divPictureColumnHalf = document.createElement('div');
@@ -37,6 +36,9 @@ function entryDOMTree(entry) {
   var divDescriptionColumnHalf = document.createElement('div');
   var h1 = document.createElement('h1');
   var p = document.createElement('p');
+  var photoTitleValue = $form.elements.photoTitle.value;
+  var commentsValue = $form.elements.comments.value;
+  var photoUrlValue = $form.elements.photoUrl.value;
 
   li.setAttribute('class', 'row');
   divPictureColumnHalf.setAttribute('class', 'column-half');
@@ -52,15 +54,33 @@ function entryDOMTree(entry) {
   divPictureColumnHalf.append(img);
   divDescriptionColumnHalf.append(h1, p);
 
-  entriesEntryForm.append(li);
+  return li;
 }
-var entriesEntryForm = document.querySelector('entries-entry-form');
-$entryForm.addEventListener('submit', entryDOMTree);
+for (var i = 0; i < data.entries.length; i++) {
+  var entries = data.entries[i];
+  $ul.appendChild(entryDOMTree(entries));
+}
 
-function loadedDOM(event) {
-  for (var i = 0; i < data.entries.length; i++) {
-    window.append(entryDOMTree(data.entries[i]));
+$photoUrl.addEventListener('input', srcUpdate);
+$entryForm.addEventListener('submit', submitFunction);
+
+/// //////////////////////
+
+/// // SWITCHING VIEWPORT BACK AND FORTH //////
+var $entryFormSelectorAll = document.querySelectorAll('.entry-form');
+var $newButton = document.querySelector('.new-button');
+
+function switchToForm(event) {
+  for (var i = 0; i < $entryFormSelectorAll.length; i++) {
+    if ($entryFormSelectorAll[i].className !== 'entry-form active') {
+      $entryFormSelectorAll[i].className = 'entry-form active';
+    } else {
+      $entryFormSelectorAll[i].className = 'entry-form inactive';
+    }
+
   }
 }
 
-window.addEventListener('DOMContentLoaded', loadedDOM);
+$newButton.addEventListener('click', switchToForm);
+$entryForm.addEventListener('submit', switchToForm);
+/// ////////////////////////
