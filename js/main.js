@@ -11,7 +11,7 @@ function srcUpdate(event) {
 
 }
 
-$img.addEventListener('input', srcUpdate);
+$photoUrl.addEventListener('input', srcUpdate);
 
 function submitFunction(event) {
   event.preventDefault();
@@ -29,7 +29,7 @@ function submitFunction(event) {
 }
 
 $entryForm.addEventListener('submit', submitFunction);
-
+// th
 function entryDOMTree(entry) {
   var li = document.createElement('li');
   var divPictureColumnHalf = document.createElement('div');
@@ -52,7 +52,10 @@ function entryDOMTree(entry) {
   divPictureColumnHalf.append(img);
   divDescriptionColumnHalf.append(h1, p);
 
+  entriesEntryForm.append(li);
 }
+var entriesEntryForm = document.querySelector('entries-entry-form');
+$entryForm.addEventListener('submit', entryDOMTree);
 
 function loadedDOM(event) {
   for (var i = 0; i < data.entries.length; i++) {
