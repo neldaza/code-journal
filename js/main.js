@@ -24,7 +24,9 @@ function submitFunction(event) {
   data.nextEntryId++;
   data.entries.unshift(submissionObject);
   $formImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $ul.prepend(entryDOMTree(submissionObject));
   $form.reset();
+  switchView('entries');
 }
 
 function entryDOMTree(entry) {
@@ -54,10 +56,6 @@ function entryDOMTree(entry) {
   divDescriptionColumnHalf.append(h1, p);
 
   return li;
-}
-for (var i = 0; i < data.entries.length; i++) {
-  var entries = data.entries[i];
-  $ul.append(entryDOMTree(entries));
 }
 
 $photoUrl.addEventListener('input', srcUpdate);
