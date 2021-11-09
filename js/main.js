@@ -16,7 +16,6 @@ function srcUpdate(event) {
 
 function submitFunction(event) {
   event.preventDefault();
-
   var photoTitleValue = $form.elements.photoTitle.value;
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;
@@ -26,7 +25,6 @@ function submitFunction(event) {
   data.entries.unshift(submissionObject);
   $formImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
-
 }
 
 function entryDOMTree(entry) {
@@ -43,6 +41,7 @@ function entryDOMTree(entry) {
   li.setAttribute('class', 'row');
   divPictureColumnHalf.setAttribute('class', 'column-half');
   img.setAttribute('src', entry.photoUrlValue);
+  img.setAttribute('class', 'list-img');
   divDescriptionColumnHalf.setAttribute('class', 'column-half');
 
   var entryTitle = document.createTextNode(entry.photoTitleValue);
@@ -58,7 +57,7 @@ function entryDOMTree(entry) {
 }
 for (var i = 0; i < data.entries.length; i++) {
   var entries = data.entries[i];
-  $ul.appendChild(entryDOMTree(entries));
+  $ul.append(entryDOMTree(entries));
 }
 
 $photoUrl.addEventListener('input', srcUpdate);
@@ -67,20 +66,25 @@ $entryForm.addEventListener('submit', submitFunction);
 /// //////////////////////
 
 /// // SWITCHING VIEWPORT BACK AND FORTH //////
-var $entryFormSelectorAll = document.querySelectorAll('.entry-form');
+var $entryFormSelectorAll = document.querySelectorAll('.view');
 var $newButton = document.querySelector('.new-button');
 
-function switchToForm(event) {
+function switchView(viewName) {
   for (var i = 0; i < $entryFormSelectorAll.length; i++) {
-    if ($entryFormSelectorAll[i].className !== 'entry-form active') {
-      $entryFormSelectorAll[i].className = 'entry-form active';
+    if ($entryFormSelectorAll[i].getAttribute('data-view') === viewName) {
+      $entryFormSelectorAll[i].className = 'view';
     } else {
-      $entryFormSelectorAll[i].className = 'entry-form inactive';
+      $entryFormSelectorAll[i].className = 'hidden';
     }
-
   }
 }
 
-$newButton.addEventListener('click', switchToForm);
-$entryForm.addEventListener('submit', switchToForm);
-/// ////////////////////////
+function handleViewNavigation(event) {
+  var buttonDataView = event.target.getAttribute('data-view');
+  switchView(buttonDataView);
+}
+
+var $entriesButton = document.querySelector('.header-category');
+
+$entriesButton.addEventListener('click', handleViewNavigation);
+$newButton.addEventListener('click', handleViewNavigation);
