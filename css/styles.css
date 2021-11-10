@@ -7,12 +7,12 @@ body {
   background-color: #562a81;
   border-radius: 5px;
   border-color: transparent;
-  color: #bac;
   margin-top: 0.5rem;
   flex-basis: 8%;
   padding-top: 2px;
   padding-bottom: 2px;
   height: 2rem;
+  color: #bac;
 }
 
 .submit-button {
@@ -49,4 +49,54 @@ body {
 
 .header-h2 {
   font-weight: lighter;
+}
+
+.list-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: unset;
+  margin-block-start: unset;
+  margin-block-end: unset;
+}
+
+.list-p {
+  line-height: 2rem;
+}
+
+.header-category {
+  font-size: 14pt;
+  margin-left: 1rem;
+  color: white;
+  text-decoration: none;
+}
+
+.entries-and-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-button {
+  background-color: #562a81;
+  border-radius: 5px;
+  border-color: transparent;
+  color: white;
+  flex-basis: 8%;
+  height: 2rem;
+  font-size: 13pt;
+}
+
+.new-button > a {
+  color: white;
+  text-decoration: none;
+}
+
+.no-entries {
+  visibility: collapse;
+  justify-content: center;
 }

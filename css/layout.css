@@ -41,4 +41,8 @@
     position: relative;
     bottom: 2rem;
   }
+
+  .list-img {
+    padding-bottom: 2rem;
+  }
 }
