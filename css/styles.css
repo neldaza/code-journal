@@ -96,11 +96,6 @@ ul {
   text-decoration: none;
 }
 
-.no-entries {
-  visibility: collapse;
-  justify-content: center;
-}
-
 .fas {
   color: #562a81;
 }

@@ -25,6 +25,7 @@ function submitFunction(event) {
   data.entries.unshift(submissionObject);
   $formImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
+  $noRecorded.className = 'view hidden';
   switchView('entries');
   $ul.prepend(entryDOMTree(submissionObject));
 }
@@ -39,16 +40,17 @@ function entryDOMTree(entry) {
   var photoTitleValue = $form.elements.photoTitle.value;
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;
-  var i = document.createElement('i');
 
+  var i = document.createElement('i');
   li.setAttribute('class', 'row');
   divPictureColumnHalf.setAttribute('class', 'column-half');
   img.setAttribute('src', entry.photoUrlValue);
   img.setAttribute('class', 'list-img');
   divDescriptionColumnHalf.setAttribute('class', 'column-half');
   i.setAttribute('class', 'fas fa-pen');
+  i.setAttribute('data-view', 'entry-form');
   h1.setAttribute('class', 'flex space-between');
-  li.setAttribute('data-entry-id', data.nextEntryId++);
+  li.setAttribute('data-entry-id', entry.entryId);
 
   var entryTitle = document.createTextNode(entry.photoTitleValue);
   var photoDescription = document.createTextNode(entry.commentsValue);
@@ -58,7 +60,6 @@ function entryDOMTree(entry) {
   li.append(divPictureColumnHalf, divDescriptionColumnHalf);
   divPictureColumnHalf.append(img);
   divDescriptionColumnHalf.append(h1, p);
-
   return li;
 }
 
@@ -75,6 +76,8 @@ $entryForm.addEventListener('submit', submitFunction);
 /// // SWITCHING VIEWPORT BACK AND FORTH //////
 var $entryFormSelectorAll = document.querySelectorAll('.view');
 var $newButton = document.querySelector('.new-button');
+var $pencil = document.querySelector('i');
+var $noRecorded = document.querySelector('.no-recorded');
 
 function switchView(viewName) {
   for (var i = 0; i < $entryFormSelectorAll.length; i++) {
@@ -93,5 +96,6 @@ function handleViewNavigation(event) {
 
 var $entriesButton = document.querySelector('.header-category');
 
+// $pencil.addEventListener('click', handleViewNavigation);
 $entriesButton.addEventListener('click', handleViewNavigation);
 $newButton.addEventListener('click', handleViewNavigation);
