@@ -48,6 +48,7 @@ function entryDOMTree(entry) {
   divDescriptionColumnHalf.setAttribute('class', 'column-half');
   i.setAttribute('class', 'fas fa-pen');
   h1.setAttribute('class', 'flex space-between');
+  li.setAttribute('data-entry-id', data.nextEntryId++);
 
   var entryTitle = document.createTextNode(entry.photoTitleValue);
   var photoDescription = document.createTextNode(entry.commentsValue);
