@@ -39,16 +39,19 @@ function entryDOMTree(entry) {
   var photoTitleValue = $form.elements.photoTitle.value;
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;
+  var i = document.createElement('i');
 
   li.setAttribute('class', 'row');
   divPictureColumnHalf.setAttribute('class', 'column-half');
   img.setAttribute('src', entry.photoUrlValue);
   img.setAttribute('class', 'list-img');
   divDescriptionColumnHalf.setAttribute('class', 'column-half');
+  i.setAttribute('class', 'fas fa-pen');
+  h1.setAttribute('class', 'flex space-between');
 
   var entryTitle = document.createTextNode(entry.photoTitleValue);
   var photoDescription = document.createTextNode(entry.commentsValue);
-  h1.appendChild(entryTitle);
+  h1.append(entryTitle, i);
   p.appendChild(photoDescription);
 
   li.append(divPictureColumnHalf, divDescriptionColumnHalf);
