@@ -77,7 +77,7 @@ function switchView(viewName) {
     if ($entryFormSelectorAll[i].getAttribute('data-view') === viewName) {
       $entryFormSelectorAll[i].className = 'view';
     } else {
-      $entryFormSelectorAll[i].className = 'hidden';
+      $entryFormSelectorAll[i].className = 'view hidden';
     }
   }
 }
