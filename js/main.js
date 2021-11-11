@@ -29,15 +29,24 @@ function submitFunction(event) {
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;
   var submissionObject = { photoTitleValue, photoUrlValue, commentsValue };
-  submissionObject.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(submissionObject);
+  if (submissionObject === data.editing) {
+    submissionObject.setAttribute('src', data.editing.photoUrlValue);
+    submissionObject.setAttribute('value', data.editing.photoUrlValue);
+    submissionObject.setAttribute('value', data.editing.photoTitleValue);
+    submissionObject.comments.textContent = data.editing.commentsValue;
+  } else {
+    submissionObject.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(submissionObject);
+    $ul.prepend(entryDOMTree(submissionObject));
+  }
   $formImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $photoUrl.setAttribute('value', '');
+  $photoTitle.setAttribute('value', '');
+  $comments.textContent = '';
   $form.reset();
   $noRecorded.className = 'view hidden';
   switchView('entries');
-  $ul.prepend(entryDOMTree(submissionObject));
-
 }
 
 function entryDOMTree(entry) {
@@ -101,24 +110,27 @@ function switchView(viewName) {
 
 function handleViewNavigation(event) {
   var buttonDataView = event.target.getAttribute('data-view');
+  $formImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $photoUrl.setAttribute('value', '');
+  $photoTitle.setAttribute('value', '');
+  $comments.textContent = '';
   switchView(buttonDataView);
 }
 
-// if the edit button is clicked
-// then the form page should come back up
-// with all the information of that specific entry
 function edit(event) {
+
   if (event.target.className === 'fas fa-pen') {
     for (var i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === parseInt(event.target.closest('li').getAttribute('data-entry-id'))) {
         data.editing = data.entries[i];
-
+        $formImg.setAttribute('src', data.entries[i].photoUrlValue);
         $photoUrl.setAttribute('value', data.entries[i].photoUrlValue);
         $photoTitle.setAttribute('value', data.entries[i].photoTitleValue);
-        $comments.setAttribute('value', data.entries[i].commentsValue);
+        $comments.textContent = data.entries[i].commentsValue;
       }
     }
     switchView(event.target.getAttribute('data-view'));
+    $form.reset();
   }
 }
 
