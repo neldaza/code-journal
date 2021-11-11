@@ -11,6 +11,10 @@ var $newButton = document.querySelector('.new-button');
 var $noRecorded = document.querySelector('.no-recorded');
 var $liSelectorAll = document.querySelectorAll('li');
 var $li = document.querySelector('li');
+var $comments = document.querySelector('.comments');
+var $photoTitle = document.querySelector('.photo-title');
+var $entriesButton = document.querySelector('.header-category');
+var $iSelectorAll = document.querySelectorAll('i');
 
 /// SUBMIT FORM ONLY ///
 
@@ -74,19 +78,6 @@ for (var i = 0; i < data.entries.length; i++) {
   $ul.append(entryDOMTree(entries));
 }
 
-// 1. define edit function
-// 2. if the edit icon was clicked,
-// 3. loop through the data model entries,
-// 4. find the matching entry object and assign it to data.editing
-function edit() {
-  if (event.target === $pencil) {
-    for (var i = 0; i < data.entries.length; i++) {
-      data.editing = data.entries[i];
-    }
-  }
-}
-
-$ul.addEventListener('click', edit);
 $photoUrl.addEventListener('input', srcUpdate);
 $entryForm.addEventListener('submit', submitFunction);
 
@@ -96,7 +87,6 @@ $entryForm.addEventListener('submit', submitFunction);
 
 if (data.entries.length !== 0) {
   $noRecorded.className = 'view hidden';
-
 }
 
 function switchView(viewName) {
@@ -114,9 +104,20 @@ function handleViewNavigation(event) {
   switchView(buttonDataView);
 }
 
-var $entriesButton = document.querySelector('.header-category');
-var $pencil = document.querySelector('i');
+// if the edit button is clicked
+// then the form page should come back up
+// with all the information of that specific entry
+function edit(event) {
+  if (event.target.className === 'fas fa-pen') {
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === parseInt(event.target.closest('li').getAttribute('data-entry-id'))) {
+        data.editing = data.entries[i];
+      }
+    }
+    switchView(event.target.getAttribute('data-view'));
+  }
+}
 
+$ul.addEventListener('click', edit);
 $entriesButton.addEventListener('click', handleViewNavigation);
 $newButton.addEventListener('click', handleViewNavigation);
-$pencil.addEventListener('click', handleViewNavigation);
