@@ -6,6 +6,11 @@ var $formImg = document.querySelector('.placeholder-img');
 var $entryForm = document.querySelector('.entry-form');
 var $form = document.querySelector('form');
 var $ul = document.querySelector('ul');
+var $entryFormSelectorAll = document.querySelectorAll('.view');
+var $newButton = document.querySelector('.new-button');
+var $noRecorded = document.querySelector('.no-recorded');
+var $liSelectorAll = document.querySelectorAll('li');
+var $li = document.querySelector('li');
 
 /// SUBMIT FORM ONLY ///
 
@@ -28,6 +33,7 @@ function submitFunction(event) {
   $noRecorded.className = 'view hidden';
   switchView('entries');
   $ul.prepend(entryDOMTree(submissionObject));
+
 }
 
 function entryDOMTree(entry) {
@@ -68,16 +74,30 @@ for (var i = 0; i < data.entries.length; i++) {
   $ul.append(entryDOMTree(entries));
 }
 
+// 1. define edit function
+// 2. if the edit icon was clicked,
+// 3. loop through the data model entries,
+// 4. find the matching entry object and assign it to data.editing
+function edit() {
+  if (event.target === $pencil) {
+    for (var i = 0; i < data.entries.length; i++) {
+      data.editing = data.entries[i];
+    }
+  }
+}
+
+$ul.addEventListener('click', edit);
 $photoUrl.addEventListener('input', srcUpdate);
 $entryForm.addEventListener('submit', submitFunction);
 
 /// //////////////////////
 
 /// // SWITCHING VIEWPORT BACK AND FORTH //////
-var $entryFormSelectorAll = document.querySelectorAll('.view');
-var $newButton = document.querySelector('.new-button');
-var $pencil = document.querySelector('i');
-var $noRecorded = document.querySelector('.no-recorded');
+
+if (data.entries.length !== 0) {
+  $noRecorded.className = 'view hidden';
+
+}
 
 function switchView(viewName) {
   for (var i = 0; i < $entryFormSelectorAll.length; i++) {
@@ -95,7 +115,8 @@ function handleViewNavigation(event) {
 }
 
 var $entriesButton = document.querySelector('.header-category');
+var $pencil = document.querySelector('i');
 
-// $pencil.addEventListener('click', handleViewNavigation);
 $entriesButton.addEventListener('click', handleViewNavigation);
 $newButton.addEventListener('click', handleViewNavigation);
+$pencil.addEventListener('click', handleViewNavigation);
