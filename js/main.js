@@ -112,6 +112,10 @@ function edit(event) {
     for (var i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === parseInt(event.target.closest('li').getAttribute('data-entry-id'))) {
         data.editing = data.entries[i];
+
+        $photoUrl.setAttribute('value', data.entries[i].photoUrlValue);
+        $photoTitle.setAttribute('value', data.entries[i].photoTitleValue);
+        $comments.setAttribute('value', data.entries[i].commentsValue);
       }
     }
     switchView(event.target.getAttribute('data-view'));
