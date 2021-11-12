@@ -54,12 +54,12 @@
   height: 50%;
 }
 
-.width-100 {
-  width: 100%;
-}
-
 .text-align-right {
   text-align: right;
+}
+
+.justify-content-right {
+  justify-content: right;
 }
 
 @media only screen and (min-width: 768px) {

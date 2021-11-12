@@ -107,6 +107,8 @@ $entryForm.addEventListener('submit', submitFunction);
 var $deleteEntryButton = document.querySelector('.delete-entry');
 var $deleteModal = document.querySelector('.cancel-background');
 var $cancelButton = document.querySelector('.cancel-button');
+var $deleteButton = document.querySelector('.confirm-button');
+var $saveAndDelete = document.querySelector('.save-and-delete');
 
 if (data.entries.length !== 0) {
   $noRecorded.className = 'view hidden';
@@ -126,6 +128,7 @@ function switchView(viewName) {
 function handleViewNavigation(event) {
   $form.reset();
   var buttonDataView = event.target.getAttribute('data-view');
+  $saveAndDelete.className = 'save-and-delete column-full justify-content-right flex';
   $formImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $deleteEntryButton.className = 'delete-entry hidden';
   switchView(buttonDataView);
@@ -134,6 +137,7 @@ function handleViewNavigation(event) {
 function edit(event) {
   event.preventDefault();
   if (event.target.className === 'fas fa-pen') {
+    $saveAndDelete.className = 'save-and-delete column-full space-between flex';
     $deleteEntryButton.className = 'delete-entry view';
     for (var i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === parseInt(event.target.closest('li').getAttribute('data-entry-id'))) {
@@ -156,6 +160,34 @@ function showDeleteModal(event) {
 function hideDeleteModal(event) {
   $deleteModal.className = 'cancel-background flex justify-center position-fixed hidden';
 }
+
+function deleteEntry(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === data.editing.entryId) {
+      var $liSelectorAll = document.querySelectorAll('li');
+      var nodeListArray = [];
+      for (var a = 0; a < $liSelectorAll.length; a++) {
+        nodeListArray.push($liSelectorAll[a]);
+
+        if (data.entries[i].entryId === parseInt($liSelectorAll[a].getAttribute('data-entry-id'))) {
+          $ul.removeChild($liSelectorAll[a]);
+          nodeListArray.splice(a, 1);
+          data.entries.splice(i, 1);
+          $liSelectorAll = nodeListArray;
+          $deleteModal.className = 'cancel-background flex justify-center position-fixed hidden';
+          switchView(event.target.getAttribute('data-view'));
+        }
+
+      }
+    }
+
+  }
+  if (data.entries.length === 0) {
+    $noRecorded.className = 'row no-recorded view';
+  }
+}
+
+$deleteButton.addEventListener('click', deleteEntry);
 $cancelButton.addEventListener('click', hideDeleteModal);
 $deleteEntryButton.addEventListener('click', showDeleteModal);
 $ul.addEventListener('click', edit);
