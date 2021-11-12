@@ -106,6 +106,7 @@ $entryForm.addEventListener('submit', submitFunction);
 /// // SWITCHING VIEWPORT BACK AND FORTH //////
 var $deleteEntryButton = document.querySelector('.delete-entry');
 var $deleteModal = document.querySelector('.cancel-background');
+var $cancelButton = document.querySelector('.cancel-button');
 
 if (data.entries.length !== 0) {
   $noRecorded.className = 'view hidden';
@@ -152,7 +153,10 @@ function edit(event) {
 function showDeleteModal(event) {
   $deleteModal.className = 'cancel-background flex justify-center position-fixed view';
 }
-
+function hideDeleteModal(event) {
+  $deleteModal.className = 'cancel-background flex justify-center position-fixed hidden';
+}
+$cancelButton.addEventListener('click', hideDeleteModal);
 $deleteEntryButton.addEventListener('click', showDeleteModal);
 $ul.addEventListener('click', edit);
 $entriesButton.addEventListener('click', handleViewNavigation);
