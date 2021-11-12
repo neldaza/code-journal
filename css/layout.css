@@ -38,6 +38,30 @@
   text-align: center;
 }
 
+.align-items-center {
+  align-items: center;
+}
+
+.position-fixed {
+  position: fixed;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.height-50 {
+  height: 50%;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
 @media only screen and (min-width: 768px) {
   .container {
     max-width: 900px;

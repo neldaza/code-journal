@@ -104,6 +104,7 @@ $entryForm.addEventListener('submit', submitFunction);
 /// //////////////////////
 
 /// // SWITCHING VIEWPORT BACK AND FORTH //////
+var $deleteEntryButton = document.querySelector('.delete-entry');
 
 if (data.entries.length !== 0) {
   $noRecorded.className = 'view hidden';
@@ -124,12 +125,14 @@ function handleViewNavigation(event) {
   $form.reset();
   var buttonDataView = event.target.getAttribute('data-view');
   $formImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $deleteEntryButton.className = 'delete-entry hidden';
   switchView(buttonDataView);
 }
 
 function edit(event) {
   event.preventDefault();
   if (event.target.className === 'fas fa-pen') {
+    $deleteEntryButton.className = 'delete-entry view';
     for (var i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === parseInt(event.target.closest('li').getAttribute('data-entry-id'))) {
         data.editing = data.entries[i];
@@ -138,6 +141,7 @@ function edit(event) {
         $photoTitle.value = data.entries[i].photoTitleValue;
         $comments.value = data.entries[i].commentsValue;
         switchView(event.target.getAttribute('data-view'));
+
       }
     }
 
