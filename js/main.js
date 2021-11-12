@@ -9,7 +9,6 @@ var $ul = document.querySelector('ul');
 var $entryFormSelectorAll = document.querySelectorAll('.view');
 var $newButton = document.querySelector('.new-button');
 var $noRecorded = document.querySelector('.no-recorded');
-var $liSelectorAll = document.querySelectorAll('li');
 var $li = document.querySelector('li');
 var $comments = document.querySelector('.comments');
 var $photoTitle = document.querySelector('.photo-title');
@@ -29,21 +28,28 @@ function submitFunction(event) {
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;
   var submissionObject = { photoTitleValue, photoUrlValue, commentsValue };
-  if (submissionObject === data.editing) {
-    submissionObject.setAttribute('src', data.editing.photoUrlValue);
-    submissionObject.setAttribute('value', data.editing.photoUrlValue);
-    submissionObject.setAttribute('value', data.editing.photoTitleValue);
-    submissionObject.comments.textContent = data.editing.commentsValue;
-  } else {
-    submissionObject.entryId = data.nextEntryId;
-    data.nextEntryId++;
-    data.entries.unshift(submissionObject);
-    $ul.prepend(entryDOMTree(submissionObject));
+  for (var i = 0; i < data.entries.length; i++) {
+    var $liSelectorAll = document.querySelectorAll('li');
+    for (var a = 0; a < $liSelectorAll.length; a++) {
+      if (data.entries[i].entryId === parseInt($liSelectorAll[a].getAttribute('data-entry-id'))) {
+        data.entries[i].photoUrlValue = photoUrlValue;
+        data.entries[i].photoTitleValue = photoTitleValue;
+        data.entries[i].commentsValue = commentsValue;
+        var dataEntry = data.entries[i];
+        var newTree = entryDOMTree(dataEntry);
+        var oldTree = $liSelectorAll[a];
+        $ul.replaceChild(newTree, oldTree);
+        $form.reset();
+        $noRecorded.className = 'view hidden';
+        switchView('entries');
+        return;
+      }
+    }
   }
-  $formImg.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $photoUrl.setAttribute('value', '');
-  $photoTitle.setAttribute('value', '');
-  $comments.textContent = '';
+  submissionObject.entryId = data.nextEntryId;
+  data.nextEntryId++;
+  data.entries.unshift(submissionObject);
+  $ul.prepend(entryDOMTree(submissionObject));
   $form.reset();
   $noRecorded.className = 'view hidden';
   switchView('entries');
