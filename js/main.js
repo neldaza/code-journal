@@ -28,31 +28,36 @@ function submitFunction(event) {
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;
   var submissionObject = { photoTitleValue, photoUrlValue, commentsValue };
-  for (var i = 0; i < data.entries.length; i++) {
-    var $liSelectorAll = document.querySelectorAll('li');
-    for (var a = 0; a < $liSelectorAll.length; a++) {
-      if (data.entries[i].entryId === parseInt($liSelectorAll[a].getAttribute('data-entry-id'))) {
-        data.entries[i].photoUrlValue = photoUrlValue;
-        data.entries[i].photoTitleValue = photoTitleValue;
-        data.entries[i].commentsValue = commentsValue;
-        var dataEntry = data.entries[i];
-        var newTree = entryDOMTree(dataEntry);
-        var oldTree = $liSelectorAll[a];
-        $ul.replaceChild(newTree, oldTree);
-        $form.reset();
-        $noRecorded.className = 'view hidden';
-        switchView('entries');
-        return;
+  if (data.editing === null) {
+    submissionObject.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(submissionObject);
+    $ul.prepend(entryDOMTree(submissionObject));
+    $form.reset();
+    $noRecorded.className = 'view hidden';
+    switchView('entries');
+  } else {
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing.entryId) {
+        var $liSelectorAll = document.querySelectorAll('li');
+        for (var a = 0; a < $liSelectorAll.length; a++) {
+          if (data.entries[i].entryId === parseInt($liSelectorAll[a].getAttribute('data-entry-id'))) {
+            data.entries[i].photoUrlValue = photoUrlValue;
+            data.entries[i].photoTitleValue = photoTitleValue;
+            data.entries[i].commentsValue = commentsValue;
+            var dataEntry = data.entries[i];
+            var newTree = entryDOMTree(dataEntry);
+            var oldTree = $liSelectorAll[a];
+            $ul.replaceChild(newTree, oldTree);
+            $form.reset();
+            $noRecorded.className = 'view hidden';
+            switchView('entries');
+          }
+        }
       }
     }
+    data.editing = null;
   }
-  submissionObject.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(submissionObject);
-  $ul.prepend(entryDOMTree(submissionObject));
-  $form.reset();
-  $noRecorded.className = 'view hidden';
-  switchView('entries');
 }
 
 function entryDOMTree(entry) {
