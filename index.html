@@ -32,7 +32,11 @@
             <button class="new-button" data-view="entry-form">NEW</button>
           </div>
         </div>
-        <div class="row no-entries"> No entries have been recorded.</div>
+        <div class="row no-recorded">
+          <div class="column-full text-align-center">
+            No entries have been recorded.
+          </div>
+        </div>
         <ul class="main-list">
         </ul>
       </div>
@@ -52,16 +56,16 @@
             <div class="column-half">
               <div class="word-hug">
                 <h3 class="titles">Title</h3>
-                <input type="text" class="text photo-title" name="photoTitle" required>
+                <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
                 <h3 class="titles">Photo URL</h3>
-                <input type="text" class="text photo-url" name="photoUrl" required>
+                <input type="text" class="text photo-url" name="photoUrl" id="photoUrl" required>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="column-full">
               <h3 class="titles">Notes</h3>
-              <textarea class="text comments" name="comments"></textarea>
+              <textarea class="text comments" name="comments" id="comments"></textarea>
               <div class="submit-button">
                 <input class="button" type="submit" value="SAVE">
               </div>
