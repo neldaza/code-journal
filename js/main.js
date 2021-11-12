@@ -110,6 +110,7 @@ if (data.entries.length !== 0) {
 }
 
 function switchView(viewName) {
+
   for (var i = 0; i < $entryFormSelectorAll.length; i++) {
     if ($entryFormSelectorAll[i].getAttribute('data-view') === viewName) {
       $entryFormSelectorAll[i].className = 'view';
@@ -120,28 +121,26 @@ function switchView(viewName) {
 }
 
 function handleViewNavigation(event) {
+  $form.reset();
   var buttonDataView = event.target.getAttribute('data-view');
   $formImg.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $photoUrl.setAttribute('value', '');
-  $photoTitle.setAttribute('value', '');
-  $comments.textContent = '';
   switchView(buttonDataView);
 }
 
 function edit(event) {
-
+  event.preventDefault();
   if (event.target.className === 'fas fa-pen') {
     for (var i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === parseInt(event.target.closest('li').getAttribute('data-entry-id'))) {
         data.editing = data.entries[i];
         $formImg.setAttribute('src', data.entries[i].photoUrlValue);
-        $photoUrl.setAttribute('value', data.entries[i].photoUrlValue);
-        $photoTitle.setAttribute('value', data.entries[i].photoTitleValue);
-        $comments.textContent = data.entries[i].commentsValue;
+        $photoUrl.value = data.entries[i].photoUrlValue;
+        $photoTitle.value = data.entries[i].photoTitleValue;
+        $comments.value = data.entries[i].commentsValue;
+        switchView(event.target.getAttribute('data-view'));
       }
     }
-    switchView(event.target.getAttribute('data-view'));
-    $form.reset();
+
   }
 }
 
