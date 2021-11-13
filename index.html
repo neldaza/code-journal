@@ -27,7 +27,7 @@
     <div data-view="entries" class="view entries hidden">
       <div class="container">
         <div class="row">
-          <div class="column-full entries-and-button">
+          <div class="column-full flex space-between align-items-center">
             <h1>Entries</h1>
             <button class="new-button" data-view="entry-form">NEW</button>
           </div>
@@ -66,12 +66,26 @@
             <div class="column-full">
               <h3 class="titles">Notes</h3>
               <textarea class="text comments" name="comments" id="comments"></textarea>
-              <div class="submit-button">
-                <input class="button" type="submit" value="SAVE">
-              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="save-and-delete column-full justify-content-right flex">
+              <p class="delete-entry hidden">Delete Entry</p>
+              <input class="button" type="submit" value="SAVE">
             </div>
           </div>
         </form>
+      </div>
+    </div>
+    <div class="cancel-background flex justify-center position-fixed hidden">
+      <div class="cancel-box text-align-center position-relative">
+        <div class="cancel-box-text flex justify-center align-items-center height-50">
+          Are you sure you want to delete this entry?
+        </div>
+        <div class="cancel-box-buttons flex space-between align-items-center height-50">
+          <button type="submit" class="cancel-button">CANCEL</button>
+          <button type="submit" class="confirm-button" data-view="entries">CONFIRM</button>
+        </div>
       </div>
     </div>
   </main>
