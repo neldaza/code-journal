@@ -167,13 +167,10 @@ function deleteEntry(event) {
       var $liSelectorAll = document.querySelectorAll('li');
       var nodeListArray = [];
       for (var a = 0; a < $liSelectorAll.length; a++) {
-        nodeListArray.push($liSelectorAll[a]);
-
-        if (data.entries[i].entryId === parseInt($liSelectorAll[a].getAttribute('data-entry-id'))) {
+        if (data.editing.entryId === parseInt($liSelectorAll[a].getAttribute('data-entry-id'))) {
+          nodeListArray.push($liSelectorAll[a]);
           $ul.removeChild($liSelectorAll[a]);
-          nodeListArray.splice(a, 1);
           data.entries.splice(i, 1);
-          $liSelectorAll = nodeListArray;
           $deleteModal.className = 'cancel-background flex justify-center position-fixed hidden';
           switchView(event.target.getAttribute('data-view'));
         }
